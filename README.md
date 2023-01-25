@@ -18,18 +18,18 @@
 
 1. As a user I would like to sign up for Mitchys Used Cars app
 2. As a user I would like to be able to sign in to Mitchys Used Cars
-3. As a user I would like to browse all the used cars 
+3. As a user I would like to create, view, update, and delete my car postings
 
 ## User Story V2
 
 1. As a user I would like to add images of used cars for verification 
 2. As a user I would like to change my account password for protection
-3. As a user I would like to add updated my car as sold or reduced price 
+3. As a user I would like to update account informatin like email and username
 
 ## User Story V3 
  1. As a user I would like to have a fully Intergrated chat system
  2. As a user I would like to sort what Im browsing by location 
- 3. As a user I would like to filter what i browse by price and other identifiers
+ 3. As a user I would like to filter what I browse by price and other identifiers
 
 
 
