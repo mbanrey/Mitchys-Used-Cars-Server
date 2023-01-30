@@ -61,7 +61,7 @@ router.patch('/descriptions/:descriptionId', (req, res, next) => {
 
 // DELETE
 // DELETE /descriptions/:descriptionId
-router.delete('/descriptions/:descriptionId', (req, res, next) => {
+router.delete('/descriptions/:descriptionId/:carId', (req, res, next) => {
     const carId = req.body.description.carId
 
     Car.findById(carId)

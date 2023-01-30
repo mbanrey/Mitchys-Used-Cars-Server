@@ -15,23 +15,27 @@ const carSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		// class: {
-		// 	type: String,
-		// 	required: true,
-		// },
-		// drive: {
-		// 	type: Number,
-		// 	required: true,
-		// 	min: 2,
-		// 	max: 4,
-		// },
-        // miles:{
-        //     type:Number,
-        //     required: true,
-        //     min: 0 ,
-        //     max: 1000000
-        // },
-        // description:[descriptionSchema]
+		class: {
+			type: String,
+			required: true,
+		},
+		drive: {
+			type: Number,
+			required: true,
+			min: 2,
+			max: 4,
+		},
+        miles:{
+            type:Number,
+            required: true,
+            min: 0 ,
+            max: 1000000
+        },
+        description:[descriptionSchema],
+		// owner:{
+		// 	type: mongoose.Schema.Types.ObjectId,
+		// 	ref: 'User'
+		// }
 	},
 	{
 		timestamps: true,

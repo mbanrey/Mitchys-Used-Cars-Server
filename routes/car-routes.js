@@ -1,15 +1,17 @@
+
+
 const express = require('express')
 
 const { handle404 } = require('../lib/custom-errors')
-
+const { requireToken } = require('../config/auth')
 // require the Model we just created
 const Car = require('../models/car')
 
 // Creating a router for us to make paths on
 const router = express.Router()
 
-router.get('/cars', (req,res, next)=>{
-	Car.find()
+router.get('/cars', requireToken, (req,res, next)=>{
+	Car.find({'owner': req.user._id})
 	.then(cars =>{
 		return cars.map(car => car)
 	})

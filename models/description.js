@@ -4,18 +4,19 @@ const Schema = mongoose.Schema
 
 const descriptionSchema = new Schema(
 	{
-		title: {
-			type: String,
-			required: true,
-		},
+		// title: {
+		// 	type: String,
+		// 	required: true,
+		// },
 		content: {
 			type: String,
-			required: true,
+			default: null,
+			nulable: true
 		},
-        owner: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }
+        // owner: {
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: 'User'
+        // }
 	},
 	{
 		timestamps: true,
