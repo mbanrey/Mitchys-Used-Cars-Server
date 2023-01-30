@@ -11,7 +11,7 @@ const Car = require('../models/car')
 const router = express.Router()
 
 router.get('/cars', requireToken, (req,res, next)=>{
-	Car.find({'owner': req.user._id})
+	Car.find() //{'owner': req.user._id}
 	.then(cars =>{
 		return cars.map(car => car)
 	})
@@ -29,8 +29,9 @@ router.get('/cars/:id', (req,res,next) =>{
 })
 // CREATE
 // POST /cars
-router.post('/cars', (req, res, next) => {
-
+router.post('/cars', requireToken, (req, res, next) => {
+	const car = req.body.car
+    car.owner = req.user._id
 	Car.create(req.body.car)
 		.then((car) => {
 			res.status(201).json({ car: car })
@@ -38,22 +39,32 @@ router.post('/cars', (req, res, next) => {
 		.catch(next)
 })
 
+
+
+	
 // UPDATE
 // PATCH /car/:id
-router.patch('/cars/:id', (req, res, next) => {
-    Car.findById(req.params.id)
-        .then(handle404)
+router.patch('/cars/:id',requireToken, (req, res, next) => {
+    const car = req.body.car
+	car.owner = req.user._id
+	if(car.owner != req.user._id){
+
+	}else{
+	Car.findById(req.params.id)
+        
+		.then(handle404)
         .then(car => {
             // { car: {} }
             return car.updateOne(req.body.car)
         })
         .then(() => res.sendStatus(204))
         .catch(next)
+	}	
 })
 
 // DELETE
 // DELETE /cars/:id
-router.delete('/cars/:id', (req, res, next) => {
+router.delete('/cars/:id',requireToken, (req, res, next) => {
     Car.findById(req.params.id)
         .then(handle404)
         .then(car => {

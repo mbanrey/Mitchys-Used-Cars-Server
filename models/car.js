@@ -32,10 +32,10 @@ const carSchema = new Schema(
             max: 1000000
         },
         description:[descriptionSchema],
-		// owner:{
-		// 	type: mongoose.Schema.Types.ObjectId,
-		// 	ref: 'User'
-		// }
+		owner:{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		}
 	},
 	{
 		timestamps: true,
