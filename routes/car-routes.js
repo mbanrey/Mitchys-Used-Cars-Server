@@ -45,22 +45,22 @@ router.post('/cars', requireToken, (req, res, next) => {
 // UPDATE
 // PATCH /car/:id
 router.patch('/cars/:id',requireToken, (req, res, next) => {
-    const car = req.body.car
+    const carData = req.body.car
 	// car.owner = req.user._id
-	if(car.owner = req.user._id){
-		res.sendStatus(401)
-		
-	}else{
-		Car.findById(req.params.id)
-        
+	Car.findById(req.params.id)
 		.then(handle404)
         .then(car => {
+			if(car.owner.equals(req.user._id)){
+				return car.updateOne(req.body.car)
+			}else{
+				res.sendStatus(401)
+			}
             // { car: {} }
-            return car.updateOne(req.body.car)
+            
         })
         .then(() => res.sendStatus(204))
         .catch(next)
-	}	
+	
 })
 
 // DELETE
@@ -69,7 +69,12 @@ router.delete('/cars/:id',requireToken, (req, res, next) => {
     Car.findById(req.params.id)
         .then(handle404)
         .then(car => {
-            return car.deleteOne()
+			if(car.owner.equals(req.user._id)){
+				return car.deleteOne(req.body.car)
+			}else{
+				res.sendStatus(401)
+			}
+            
         })
         .then(() => res.sendStatus(204))
         .catch(next)
