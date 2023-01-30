@@ -46,11 +46,12 @@ router.post('/cars', requireToken, (req, res, next) => {
 // PATCH /car/:id
 router.patch('/cars/:id',requireToken, (req, res, next) => {
     const car = req.body.car
-	car.owner = req.user._id
-	if(car.owner != req.user._id){
-
+	// car.owner = req.user._id
+	if(car.owner = req.user._id){
+		res.sendStatus(401)
+		
 	}else{
-	Car.findById(req.params.id)
+		Car.findById(req.params.id)
         
 		.then(handle404)
         .then(car => {
