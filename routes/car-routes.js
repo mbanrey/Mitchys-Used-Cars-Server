@@ -71,6 +71,7 @@ router.delete('/cars/:id',requireToken, (req, res, next) => {
         .then(car => {
 			if(car.owner.equals(req.user._id)){
 				return car.deleteOne(req.body.car)
+				
 			}else{
 				res.sendStatus(401)
 			}

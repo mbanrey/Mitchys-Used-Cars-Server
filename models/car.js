@@ -7,6 +7,10 @@ const Schema = mongoose.Schema
 // Creating a new car Schema
 const carSchema = new Schema(
 	{
+		year:{
+			type:Number,
+			required: true,
+		},
 		make: {
 			type: String,
 			required: true,
