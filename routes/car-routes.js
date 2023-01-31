@@ -20,7 +20,7 @@ router.get('/cars', requireToken, (req,res, next)=>{
 	})
 	.catch(next)
 })
-router.get('/cars/:id', (req,res,next) =>{
+router.get('/cars/:id', requireToken, (req,res,next) =>{
 	Car.findById(req.params.id)
 	.then(car =>{
 		res.status(200).json({car: car})
@@ -46,11 +46,15 @@ router.post('/cars', requireToken, (req, res, next) => {
 // PATCH /car/:id
 router.patch('/cars/:id',requireToken, (req, res, next) => {
     const carData = req.body.car
+		console.log(carData)
+		console.log(req.user._id)
 	// car.owner = req.user._id
 	Car.findById(req.params.id)
 		.then(handle404)
         .then(car => {
+
 			if(car.owner.equals(req.user._id)){
+				res.sendStatus(204)
 				return car.updateOne(req.body.car)
 			}else{
 				res.sendStatus(401)
@@ -58,7 +62,7 @@ router.patch('/cars/:id',requireToken, (req, res, next) => {
             // { car: {} }
             
         })
-        .then(() => res.sendStatus(204))
+        
         .catch(next)
 	
 })
