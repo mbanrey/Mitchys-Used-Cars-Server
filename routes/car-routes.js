@@ -48,7 +48,7 @@ router.patch('/cars/:id',requireToken, (req, res, next) => {
     const carData = req.body.car
 		console.log(carData)
 		console.log(req.user._id)
-	// car.owner = req.user._id
+	
 	Car.findById(req.params.id)
 		.then(handle404)
         .then(car => {
@@ -59,7 +59,7 @@ router.patch('/cars/:id',requireToken, (req, res, next) => {
 			}else{
 				res.sendStatus(401)
 			}
-            // { car: {} }
+           
             
         })
         
